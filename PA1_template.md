@@ -104,24 +104,12 @@ Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 
 
 ```r
-#act5min <- subset(actnotnull, actnotnull$interval == 5)
-#act5min$date <- as.Date(act5min$date)
-
-# actavgsteps <- act5min %>% 
-#             group_by(date) %>% 
-#             summarise(steps = mean(steps, na.rm = TRUE))
 actavgsteps <- actnotnull %>% 
-            group_by(date) %>% 
+            group_by(interval) %>% 
             summarise(steps = mean(steps, na.rm = TRUE))
 
 
-
-#actavgsteps$date <- as.Date(actavgsteps$date)
-
-#actavgstepscomb <- inner_join(act5min, actavgsteps, by = "date")
-
-
-ggplot(data = actavgsteps, aes(x=actavgsteps$date, y = actavgsteps$steps)) + geom_line()
+ggplot(data = actavgsteps, aes(x=actavgsteps$interval, y = actavgsteps$steps)) + geom_line()
 ```
 
 ![plot of chunk ComputeAverageDailyActivity](figure/ComputeAverageDailyActivity-1.png)
