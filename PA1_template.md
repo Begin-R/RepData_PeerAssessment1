@@ -104,12 +104,17 @@ Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 
 
 ```r
-act5min <- subset(actnotnull, actnotnull$interval == 5)
-act5min$date <- as.Date(act5min$date)
+#act5min <- subset(actnotnull, actnotnull$interval == 5)
+#act5min$date <- as.Date(act5min$date)
 
-actavgsteps <- act5min %>% 
+# actavgsteps <- act5min %>% 
+#             group_by(date) %>% 
+#             summarise(steps = mean(steps, na.rm = TRUE))
+actavgsteps <- actnotnull %>% 
             group_by(date) %>% 
             summarise(steps = mean(steps, na.rm = TRUE))
+
+
 
 #actavgsteps$date <- as.Date(actavgsteps$date)
 
@@ -126,11 +131,11 @@ Which 5-minute interval, on average across all the days in the dataset, contains
 
 
 ```r
-act5min[act5min$steps == max(act5min$steps),]$date
+actnotnull[actnotnull$steps == max(actnotnull$steps),]$date
 ```
 
 ```
-## [1] "2012-10-10"
+## [1] "2012-11-27"
 ```
 
 
